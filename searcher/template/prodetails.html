@@ -1,0 +1,401 @@
+{% load settingsvalue %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="/static/css/zcheader.css" />
+<link rel="stylesheet" href="/static/css/prodetails.css">
+<title>项目详情</title>
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/static/js/previewer.js"></script>
+<script>
+	$(function(){
+		$("#pro-daohang>ul>li>a").click(function(){
+			$("#pro-daohang li a").css("color","#808080");
+			$(this).css("color","#000");	
+		});
+	
+		$('#pro-daohang').find('li').click(function(){
+		      {% if user.id %}
+				var id =$(this).data('pp');
+				$('#'+id).show().siblings().hide();
+			  {% else %}
+			  	alert('请先登录!');
+			  {% endif %}
+
+		});
+	});
+    $('.btn-remind').click(function(){
+    	{% if user.id %}
+
+    	{% else %}
+    	 alert('请先登录!');
+    	{% endif %}
+    })
+ $(function(){
+    {% if flag %}
+
+    $("#focus").attr("checked",'true');
+    {% endif %}
+ })
+
+
+   function remaid(){alert('请先登录!');}
+   function booking(){alert("该项目已众筹完成，感谢你的关注。欢迎选择其它项目！");}
+
+	function attion_pr(){
+	    {% if user.id %}
+			$('#focus').attr("disabled",false);
+	         if($("#focus").is(':checked')){
+			     $.post("/add_attion/"+{{result.id}}+"/",
+				{},
+				function(data)
+				{ if(data.comment){alert(data.comment);
+				if(data.comment=="关注成功"){}};});}else{
+					$.post("/cancel_attion/"+{{result.id}}+"/",
+					{},
+					function(data)
+					{});
+				}
+		{% else %}
+		$('#focus').attr("checked",false).prop('checked',false);
+		//$('#focus').attr("disabled",true);
+		alert('请先登录');
+		{% endif %}
+    }
+    $(document).ready(function () {
+        $(".btn-remind").click(function () {
+        	{% if user.id %}
+            $("#warning_li").toggle();
+            {% else %}
+			alert('请先登录');
+			{% endif %}
+        });
+
+        $(".rmbutton").click(function (e) {
+			var type = $(this).attr("rtype");
+				$.post("{% url 'do_reminder' %}",
+						{
+
+						},
+						function (data) {
+							alert(data);
+						}
+				);
+        });
+    });
+</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#reply").click(function(){
+				$.post("{% url 'project_reply' result.id %}",
+				{
+				   content: $('#content').val(),
+				   log_code: $('#log_code').val(),
+				},
+				function (data) {
+				   if(data==1){location.reload();}else{alert(data);}
+				});
+			});
+
+		});
+	</script>
+	<script>
+		$(function(){
+			$('.down').mouseover(function(){
+				$('.down').attr('title','下载');
+			})
+			$('.down').mouseout(function(){
+				$('.down').attr('title','');
+			})
+			$('.search').mouseover(function(){
+				$('.search').attr('title','浏览');
+			})
+			$('.search').mouseout(function(){
+				$('.search').attr('title','');
+			})
+		})
+	</script>
+
+</head>
+
+<body>
+{% include "zcheader.html" %}
+<div class="pro-content">
+		<div class="pro-details">
+    		<ul>
+            	<li style="float:left;margin-top:20px;margin-left:-20px">
+                	<img src="{{result.logo}}" width="256" />
+                </li>
+                <li style="float:left;width: 340px">
+                	<ul>
+                		<li class="pro-title">
+                			<label>{{result.name}}</label></li>
+                        <li class="pro-status">
+							{% ifequal result.status 0 %}
+							<label class="mongjiangimg"><img src="/static/images/yrzhong.png" ></label>
+							{% endifequal %}
+							{% ifequal result.status 1 %}
+							<label class="mongjiangimg"><img src="/static/images/ztzhong.png" ></label>
+							{% endifequal %}
+							{% ifequal result.status 2 %}
+							<label class="mongjiangimg"><img src="/static/images/zcfinish.png" ></label>
+							{% endifequal %}
+                    		<label class="zczhong" id="click"></label>
+                		</li>
+						<li style="clear: both;"></li>
+                        <li class="pro-writing">
+                       		<label>{{result.introduction}}</label>
+                        </li>
+                	</ul>
+                </li>
+                <li>
+					<div class="checkbox">
+						<input class="btn-focus" id="focus" value=" " type="checkbox"   onclick="attion_pr()"/>
+						<label for="focus"></label>
+					</div>
+						<!--<dd><input class="btn-remind" type="button" />
+						<ul id="warning_li" class="remind-text" style="display:none">
+							<li><a href="javascript:void(0)" class="rmbutton" rtype="2">11预热提醒</a></li>
+						<li><a href="javascript:void(0)" class="rmbutton" rtype="3">投资提醒</a></li>
+							<li><a href="javascript:void(0)" class="rmbutton" rtype="5">满标提醒</a></li>
+						</ul>
+					</dd>-->
+                    {% if user.id %}
+						{% ifequal result.status 2 %}
+						<a href="#" onclick="booking()"><input class="btn-lingtou" type="button"/></a>
+						{% else %}
+					    <a href="/invest_pr/{{result.id}}1/"><input class="btn-lingtou" type="button"/></a>
+					    {% endifequal %}
+					{% else %}
+					<a href=""><input  onclick="remaid()" class="btn-lingtou" type="button"/></a>
+
+					{% endif %}
+                </li>
+				<li style="clear:both"></li>
+                <li style="margin-top:30px;margin-left:-40px;">               
+                    <label><div style="border-top:1px solid #eeeef0;width:800px;height:1px;"></div></label>
+                </li>
+                <li> 
+                <div id="pro-daohang">
+                	<ul class="pro-list">
+                		<li data-pp="projianjie" style="float:left">
+                			<a href="javascript:void(0);" style="color:#000;">公司简介</a>
+						</li>
+                		<li style="float:left">
+                			<div style="border-right:1px solid #eeeef0;width:1px;height:40px;margin-top:-10px;"></div>
+                		</li>
+                       	<li data-pp="temjianjie" style="float:left">
+                			<a href="javascript:void(0);" style="color:#808080;">团队介绍</a>
+						</li>
+                		<li style="float:left">
+                			<div style="border-right:1px solid #eeeef0;width:1px;height:40px;margin-top:-10px;"></div>
+                		</li>
+                    	<li data-pp="touzi" style="float:left">
+                			<a href="javascript:void(0);" style="color:#808080;">项目亮点</a>
+						</li>
+                		<li style="float:left">
+                			<div style="border-right:1px solid #eeeef0;width:1px;height:40px;margin-top:-10px;"></div>
+                		</li>
+                    	<li data-pp="shangye" style="float:left">
+                			<a href="javascript:void(0);" style="color:#808080;">发展计划书</a>
+						</li>
+                		<li style="float:left">
+                			<div style="border-right:1px solid #eeeef0;width:1px;height:40px;margin-top:-10px;"></div>
+                		</li>                  
+                    	<li data-pp="qita" style="float:left">
+                			<a href="javascript:void(0);" style="color:#808080;">投资人列表</a>
+						</li>
+                		<li style="float:left">
+                			<div style="border-right:1px solid #eeeef0;width:1px;height:40px;margin-top:-10px;"></div>
+                		</li>
+                  		<li data-pp="protaolun" style="float:left">
+                			<a href="javascript:void(0);" style="color:#808080;">项目讨论</a>
+						</li>               	                   
+					</ul>				
+                </div>
+                </li>
+                <li style="margin-top:60px;">
+                	<label><div style="border-top:1px solid #eeeef0;width:700px;height:1px;"></div></label> 
+                </li>
+                <div class="div-right">
+					<div id="projianjie">
+                    	<ul style="float:left">
+                        	<li>
+                            {{result.description|safe}}
+                            </li>
+                        </ul>
+                    </div>
+                <div id="temjianjie" class="display">
+                	<div>
+                		<ul style="float:left">
+                    		<li>
+                        		{{result.team|safe}}
+                        	</li>
+                    	</ul>
+                    </div>
+                </div>
+
+                <div id="touzi" class="display">
+                      <ul style="float:left">
+                	<li>
+                           {{result.patent|safe}}
+                    	</li>
+                       </ul>
+                    
+                </div>
+
+	             <div id="shangye" class="display">
+                	<div>
+						<ul>
+						<li>
+							<p>发展计划书
+							<span style="margin-left:540px"><a href="{{result.business_plan_url}}"><img alt="浏览" class="search" src="/static/images/liulan38-32.png" width="20" height="15"/></a>
+							</span>
+							</p>
+						 </li>
+						</ul>
+                    </div>
+                </div>
+					<div id="qita" class="display">
+                	<div class="qita-size">
+
+						{% if invest_detail %}
+						{% for i in invest_detail %}
+						<table class="tab-content">
+							<tr>
+								<td colspan="2"><img width="100" height="100" src="{{i.invest_user.userinformation.photo_url}}"></td>
+							</tr>
+							<tr>
+								{% if i.invest_user.userinformation.nickname %}
+								<td align="left">{{i.invest_user.userinformation.nickname}}</td>
+								{% else %}
+								<td align="left">{{i.invest_user.username|phone_cut}}</td>
+								{% endif %}
+								<td>预约投资{{i.invest_num}}万股</td>
+							</tr>
+						</table>
+						{% endfor %}
+						{% endif %}
+
+
+                    </div>
+                </div>
+					<div id="protaolun" class="display">
+						<div class="protaolun-size">
+							   {% if project_forum %}
+								   {% for i in project_forum %}
+							<dl class="talk_list">
+								<dt><a><img src="{{i.forum_user.userinformation.photo_url}}"></a></dt>
+								<dd>
+									<p>
+										{% if i.forum_user.userinformation.nickname %}
+										<a>{{i.forum_user.userinformation.nickname}}</a>
+										{% else %}
+										<a>{{ i.forum_user.username|phone_cut }}</a>
+										{% endif %}
+
+										{{ i.time_created|date:"Y-m-j  H:i:s"  }}
+										<a href="#">回复</a>
+									</p>
+									<div class="talk_con">
+										{{i.forum_content}}
+									</div>
+								</dd>
+							</dl>
+							<dl style="width: 700px;border-top:1px solid #eeeef0;height: 1px;margin-left: 40px"></dl>
+								   {% endfor %}
+							   {% endif %}
+						<dl style="clear:both"></dl>
+						<div class="reply_publish reply_box mt10">
+							<div class="bbs_hd"><a href="#" class="bbs_backtop fr">回到顶部</a><h3>快速回复  <a id='addemoji'onclick="show_emoji()"><img src="/static/emoji/img/grinning.png" title="添加表情" style="width: 23px;height: 23px;" /></a></h3></div>
+							{% include 'emoji.html' %}
+							<div class="bbs_bd">
+								<textarea id="content" name="content"></textarea>
+								<li class="yzm" >
+									<div style="padding-top: 5px;margin-left: 30px">
+										<input name="log_code" id="log_code" type="text" placeholder="验证码"
+											   onfocus="$('#code_pic').click();yzmshow()" />
+
+										<a href="javascript:void(0);" id="yzm" style="display: none"><img id="code_pic"
+																										  onclick="this.setAttribute('src',{% url 'verifycode' %} + '?nocache='+Math.random());"
+																										  src="{% url 'verifycode' %}"/></a>
+										<div style="padding-top: 5px">
+											<input type="button" id="reply" style="background: url('/static/images/reply.png') no-repeat;border: 0 none;width:105px;height: 35px;" value=" ">
+										</div>
+									</div>
+								</li>
+							</div>
+						</div>
+						</div>
+               				</div>
+					</div>
+            	</ul>
+		</div>
+    	<div class="pro-people">
+			<table class="proleft_detail" cellspacing="0" cellpadding="0" width=450">
+				<tr>
+					<td style="width: 140px"><img src="/static/images/mgmoney.png"></td>
+					<td style="width: 140px;text-indent: -5px;position:absolute;margin-top:-18px;"><img src="/static/images/mbmoney.png"></td>
+					<td style="width: 140px"><img src="/static/images/tzpeople.png"></td>
+				</tr>
+				<tr>
+					<td>每股金额</td>
+					<td>目标份额</td>
+					<td>投资人</td>
+				</tr>
+				<tr>
+					<td>{{result.invest_amount}}元</td>
+					<td>{{result.invest_num}}万份</td>
+
+
+					<td>{{invest_detail|length}}个人</td>
+				</tr>
+				<tr>
+					<td>
+						<div style="border-bottom: 1px solid #a8a8a8"></div>
+					</td>
+					<td>
+						<div style="border-bottom: 1px solid #a8a8a8"></div>
+					</td>
+					<td>
+						<div style="border-bottom: 1px solid #a8a8a8"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="detail-percent">
+						<div style="width:100%;border:1px solid #868686;border-radius:10px;">
+							<em style="width:{{result.invest_num|add_with:amount}}%;border-radius:10px;background:url(/static/images/detail-jindu.PNG) no-repeat;"></em></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">已预约份数:{{amount}}万份</td>
+					<td>完成率:{% widthratio amount result.invest_num 100 %}%</td>
+				</tr>
+				<tr>
+					<td>
+						<div style="border-bottom: 1px solid #a8a8a8"></div>
+					</td>
+					<td>
+						<div style="border-bottom: 1px solid #a8a8a8"></div>
+					</td>
+					<td>
+						<div style="border-bottom: 1px solid #a8a8a8"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">支付方式:第三方托管</td>
+					
+					<td>剩余时间:{{ result.preheat_end_date |remain_time}}</td>
+				</tr>
+				<tr>
+					<td colspan="2">项目发起时间:{{result.Preheat_date|date:"Y-m-j  " }}</td>
+					<td style="margin-left:-50px;display:block">项目结束时间:{{result.preheat_end_date|date:"Y-m-j  "  }}</td>
+				</tr>
+			</table>
+    	</div>
+     </div>
+<!--底部-->
+{% include "footer.html" %}
+</body>
+</html>

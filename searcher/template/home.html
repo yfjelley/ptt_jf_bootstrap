@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>葡萄藤众筹首页</title>
+<link rel="stylesheet" href="/static/css/home.css" />
+<script type="text/javascript" src="static/js/jquery-1.8.3.min.js"></script>
+<script>
+	$(function (){
+		$(".box-l").hover(function(){
+		   $(this).addClass("current");
+          
+		},function(){
+		   $(this).removeClass("current");
+		})
+		$(".box-r").hover(function(){
+		   $(this).addClass("current");
+          
+		},function(){
+		   $(this).removeClass("current");
+		})
+	});
+</script>
+
+</head>
+
+<body>
+
+<!--头部-->
+{% include "jinfuheader.html" %}
+
+<div class="Cpic">
+          <!-- box -->
+          <div class="box">
+          	<a href="{% url 'index_jf' %}">
+          	<div class="box-l">
+          		<img src="static/images/left.jpg" style="width:100%;height:555px;z-index:1;" />
+          		<img src="static/images/zise200-176.png" width="200px" height="176px;" style="position:absolute; top:130px;left:35%;z-index:2;" class="img-one"/>
+          		<img src="static/images/zise400-400.png" width="400px" height="400px;" style="position:absolute; top:6px;left:69px;z-index:2;" class="img-two"/>
+          		<img src="static/images/button.png" width="150px" height="55px" style="position:absolute;top:200px;left:550px;z-index:2" class="img-three"/>
+          	</div>
+          	</a>
+          	<a href="http:\\www.ddbid.com">
+          	<div class="box-r">
+          		<img src="static/images/right.jpg" style="width:100%;height:555px;z-index:1;"/>
+          		<img src="static/images/soudai.png" width="200px" height="176px;" style="position:absolute; top:130px;left:35%;z-index:2;" class="img-ones"/>
+          		<img src="static/images/bordersoudai.png" width="400px" height="400px;" style="position:absolute; top:8px;right:69px;z-index:2;" class="img-twos"/>
+          		<img src="static/images/button.png" width="150px" height="55px" style="position:absolute;top:200px;right:550px;z-index:2" class="img-threes"/>
+          	</div>
+          	</a>
+          </div>
+          <!--/ box -->
+</div>
+{% include "footer.html" %}
+<script type="text/javascript">
+    $(function(){
+        {% if form.username.errors %}
+            {% for error in form.username.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+
+        {% elif form.password2.errors %}
+            {% for error in form.password2.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+
+        {% elif form.vcode.errors %}
+            {% for error in form.vcode.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+
+        {% elif form.smscode.errors %}
+            {% for error in form.smscode.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+        {% endif %}
+    });
+    //已登陆
+        $(document).ready(function () {
+            $('#logged li').hover(function () {
+                $('ul', this).slideDown(200);
+                $(this).children('a:first').addClass("hov");
+            }, function () {
+                $('ul', this).slideUp(100);
+                $(this).children('a:first').removeClass("hov");
+            });
+        });
+        //已登陆结束
+        function T_Logout() {
+            //alert("logout");
+            QC.Login.signOut();
+            WB2.logout(function () {
+            //alert('mywblogout');
+        });
+    }
+</script>
+</body>
+</html>

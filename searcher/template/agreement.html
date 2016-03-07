@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>注册协议</title>
+	<link rel="stylesheet" href="/static/css/zcheader.css" />
+	<link rel="stylesheet" href="/static/css/agreement.css" />
+	<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+{% include "zcheader.html" %}
+<div id="div1">
+	<div style="height:50px;"></div>
+	<div id="div2">
+		<div align="center">
+			<ul class="sign_title">
+				<li>
+					<label>服务协议</label>
+				</li>
+				<li style="margin-left:-10px;margin-top: 20px;">
+					<div style="border-top:1px solid #eeeef0; width:518px; height:1px; "></div>
+				</li>
+			</ul>
+
+		</div>
+		<div class="Overhidden">
+            <span>
+                    {{agreement|safe}}
+            </span>
+		</div>
+		<div align="center">
+			<ul class="return_content">
+				<li style=" margin-left:-10px;margin-top: 25px;">
+					<div style="border-top:1px solid #eeeef0; width:518px; height:1px;"></div>
+				</li>
+				<li>
+					<input id="return_to_register" type="button"
+						   style="height:30px;background-color:#4a3c70;width:80px;" value="返回"/>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% include "footer.html" %}
+<script type="text/javascript">
+   $(function(){
+         $("#return_to_register").click(function(){
+           window.location.replace("/register/");
+          })
+   })
+   
+   
+    //已登陆
+        $(document).ready(function () {
+            $('#logged li').hover(function () {
+                $('ul', this).slideDown(200);
+                $(this).children('a:first').addClass("hov");
+            }, function () {
+                $('ul', this).slideUp(100);
+                $(this).children('a:first').removeClass("hov");
+            });
+        });
+        //已登陆结束
+        function T_Logout() {
+            //alert("logout");
+            QC.Login.signOut();
+            WB2.logout(function () {
+            //alert('mywblogout');
+        });
+    }
+</script>
+</body>
+</html>

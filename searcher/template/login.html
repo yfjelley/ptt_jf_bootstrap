@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block index %}
+<style>
+	.mod-head {text-align: center;margin-top:50px;margin-bottom:30px;}
+    #register .row {background-color:#FFFFFF;margin-top:60px;padding-bottom:80px;}
+	#register .login {float:right;}
+	#register .checkbox {padding-top:0px;}
+	#register .img-thumbnail {background-color:#101010;margin-bottom:30px;}
+</style>
+<div class="container" id="register">
+	<div class="row" >
+		<div class="mod-head">
+			<img src="/static/images/zclogo.png" class="img-thumbnail">
+			<h2>账号登录</h2>
+		</div>
+		<div class="mod-body">
+			<form class="form-horizontal" action="{% url 'register' %}" method="post" name="form1">
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-4">
+					  {{ form.username }}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-4">
+						{{ form.password }}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-4">
+						{{ form.vcode }}
+					</div>
+					<div class="col-sm-1">
+						<img onclick="this.setAttribute('src',{% url 'verifycode' %} + '?nocache='+Math.random());"
+																		src="{% url 'verifycode' %}"/>
+					</div>
+				</div>
+				  <div class="form-group">
+					<div class="col-sm-offset-4 col-sm-2">
+					  <div class="checkbox">
+						 <a href="{% url 'forgetpw' %}">找回密码</a>
+					  </div>
+					</div>
+					<div class="col-sm-2">
+					  <div class="login">
+						  <a href="{% url 'register' %}">注册账号</a>
+					  </div>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<div class="col-sm-offset-4 col-sm-4 ">
+					  <button type="submit" class="btn btn-primary btn-block">立即登录</button>
+					</div>
+				  </div>
+			</form>
+		</div>
+		<div class="mod-footer"></div>
+	</div>
+</div>
+{% endblock %}

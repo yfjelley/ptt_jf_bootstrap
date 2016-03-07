@@ -1,0 +1,23 @@
+body{margin:0px}
+.Cpic{width:100%;background-color:#eeeef0;height:554px;min-width:1440px;}
+
+.box{ height: 475px; position: relative;left:-50px;}
+.box-l{ width:51.5%; position: absolute; top: 0;margin-left:10px;}
+.box-l .img-one{ display: block;}
+.box-l .img-two{ display: none}
+.box-l .img-three{ display: none}
+
+.box-l.current{ width: 880px; z-index: 99}
+.box-l.current .img-one{ display: none}
+.box-l.current .img-two{ display: block;}
+.box-l.current .img-three{ display:block;}
+
+.box-r{ width:51.5%; position: absolute; top: 0;right:0;margin-right:-50px;}
+.box-r .img-ones{ display: block;}
+.box-r .img-twos{ display: none}
+.box-r .img-threes{ display: none}
+
+.box-r.current{ width: 880px; z-index: 99}
+.box-r.current .img-ones{ display: none}
+.box-r.current .img-twos{ display: block;}
+.box-r.current .img-threes{ display:block;}

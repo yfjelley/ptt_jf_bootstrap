@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block index %}
+<style>
+	#about .row {margin-top:50px;background-color:#FFFFFF;padding:50px;}
+	.page-header {margin:0px;}
+	#about h3 {margin-top:0px;}
+	#about p {padding-top:10px;}
+	.display_content {display:none;}
+	.dl-horizontal dt {width:auto;}
+	.dl-horizontal dd {margin-left:700px;}
+	.dl-horizontal dd,dt {line-height: 2;font-weight:500;}
+	dl {margin-top:10px;}
+	body {height:100%;}
+	#row {min-height:550px;}
+
+
+
+</style>
+
+<div class="container" id="about">
+	<div class="row" id="row">
+		<div class="col-sm-2">
+			<ul class="list-group" id="navigation">
+			   <li class="list-group-item"><a data-pp="company" href="javascript:void(0)">公司简介</a></li>
+			   <li class="list-group-item"><a data-pp="contact" href="javascript:;">联系方式</a></li>
+			   <li class="list-group-item"><a data-pp="partner" href="javascript:;">合作伙伴</a></li>
+			   <li class="list-group-item"><a data-pp="media" href="javascript:;">媒体报道</a></li>
+			   <li class="list-group-item"><a data-pp="join" href="javascript:;">加入我们</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-10">
+			<div id="company">
+				<div class="page-header">
+				   <h3>公司简介</h3>
+				</div>
+				<p>{{description|safe}}</p>
+			</div>
+			<div id="contact" class="display_content">
+				<div class="page-header">
+				   <h3>联系方式</h3>
+				</div>
+				<p>{{description|safe}}</p>
+			</div>
+			<div id="partner" class="display_content">
+				<div class="page-header">
+				   <h3>合作伙伴</h3>
+				</div>
+				<p>{{description|safe}}</p>
+			</div>
+			<div id="media" class="display_content">
+				<div class="page-header">
+				   <h3>媒体报道</h3>
+				</div>
+				<dl class="dl-horizontal">
+					{% if mediareports %}
+					{% for i in mediareports %}
+				    	<a target="_blank" href="{{i.url}}">
+							<dt >{{i.title}}</dt>
+						</a>
+						<dd>{{i.add_date|date:"Y-m-j  H:i:s"}}</dd>
+					{% endfor %}
+					{% endif %}
+				</dl>
+			</div>
+			<div id="join" class="display_content">
+				<div class="page-header">
+				   <h3>加入我们</h3>
+				</div>
+				<dl class="dl-horizontal">
+					{% if mediareports %}
+					{% for i in mediareports %}
+				    	<a target="_blank" href="{{i.url}}">
+							<dt >{{i.title}}</dt>
+						</a>
+						<dd>{{i.add_date|date:"Y-m-j  H:i:s"}}</dd>
+					{% endfor %}
+					{% endif %}
+				</dl>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+{% block script %}
+<script>
+  $(document).ready(function(){
+		$('#navigation').find('a').click(function(){
+			var id =$(this).data('pp');
+			$('#'+id).show().siblings().hide();
+		});
+	});
+</script>
+{% endblock %}

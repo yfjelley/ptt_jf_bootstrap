@@ -1,0 +1,82 @@
+﻿
+html,body{height: 100%; margin: 0; padding: 0;}
+*{ margin:0; padding:0;}
+body { margin:0 auto; font-size:12px; font-family:"Microsoft YaHei","simsun","Helvetica Neue","Arial", "Helvetica", "sans-serif"; }
+.wap_minwidth{max-width:1660px;min-width: 1350px;width:expression(document.body.clientWidth < 1024? "1024px": "auto" );}
+ul,dl,dt,dd,h1,h2,h3,h4,h5,h6,form { padding:0; margin:0;}
+ul { list-style:none;}
+img { border:0px;}
+.logo img{margin-left: 180px;}
+a { color:#4c4c4c; text-decoration:none;}
+a:hover { color:#ff0000;}
+.hdzq{display:block;color:#666666;}
+.hdzq:hover{color:#FF0000; text-decoration:inherit;}
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {margin:0;padding:0;}
+/*body, button, input, select, textarea {font:12px tahoma, arial, Verdana, sans-serif;}*/
+h1, h2, h3, h4, h5, h6 {font-size:12px;font-style:normal;}
+ol, ul, li, dl, dd, dt {list-style:none;}
+
+
+.tablebig{width: 900px;padding-top:40px;padding-bottom:40px;margin: 0px auto;}
+.fl {float:left;}
+.fr {float:right;}
+.cb {clear:both;}
+.mt10{ margin-top:10px;}
+.clearfix:after{ clear:both; content:" "; display:block; font-size:0; height:0; visibility:hidden;}
+b,i{ font-style:normal; font-weight:normal;}
+.user_con{ width:1024px; margin:0 auto;min-height:530px;}
+
+#code{ position:absolute; top:-168px; right:-50px;}
+#mid{ width:100%; overflow:hidden; padding-bottom:70px; background:#EEEEF0; margin:0;padding:0; position:absolute;} /*margin-bottom:70px; */
+#middd{ width:100%; padding-bottom:70;pxpadding-top: 20px;background:#EEEEF0; margin:0;padding:0;
+max-width:1660px;min-width: 1050px;min-height:480px;width:expression(document.body.clientWidth < 1050? "1050px": "auto" );} /*margin-bottom:70px; */
+#mid_pass{ width:100%; padding-bottom:70;pxpadding-top: 20px;background:#EEEEF0; margin:0;padding:0;
+max-width:1660px;min-width: 1050px;min-height:550px;width:expression(document.body.clientWidth < 1050? "1050px": "auto" );}
+#midre{width:100%; padding-bottom:70px;background:#EEEEF0; margin:0;padding:0;min-height: 500px;}
+.bbs_search{ padding:10px 0; overflow:hidden;}
+.bbs_logo{ width:226px; height:71px; float:left; display:none;}
+.bbs_hunt{ float:left; padding:15px 0 0 20px; display:none;}
+.bbs_hunt input{ width:440px; height:20px; line-height:20px; font-size:16px; color:#666; padding:10px 5px; float:left; border:1px solid #ddd;}
+.bbs_hunt input:hover{border:1px solid #c50512;}
+/*placeholder样式*/
+/*这是低端浏览器下placeholder的字体颜色*/
+placeholder{color: #bfbfbf;}
+/*这是firefox下placeholder的字体颜色*/
+::-moz-placeholder {color: #bfbfbf;}
+/*这是webkit下placeholder的字体颜色*/
+::-webkit-input-placeholder {color: #bfbfbf;}
+/*
+ *    满足这两个条件，该js能工作的更好，更智能
+ *    1.文本框的父定位元素需加入*zoom: 1
+ *    2.文本框或其父元素的position，不能同时为static
+ */
+.textbox {position: relative;*zoom: 1;}
+
+/*分页*/
+.pages{ padding:20px 0 10px 0; text-align:right;}
+.pages a{color: #333;display:inline-block;line-height: 18px;padding: 2px 6px;border-radius: 10px;margin:0 5px;}
+.pages a.before{border-radius:15px 10px 10px 15px;}
+.pages a.after{border-radius:10px 15px 15px 10px;}
+.pages a.active,.pages a:hover{border:1px solid #c50512;color:#c50512;}
+.pages a.currentpage{color:#FF0000;}
+
+/*分页结束*/
+.bbs_hunt input.bbs_search_btn{ width:47px; height:42px; background:url(../images/search.png) no-repeat 0 0; border:none; cursor:pointer;}
+
+/*验证*/
+.Validform_error{background-color: #ffe7e7;border: 1px solid #ccc;}
+.Validform_checktip{color: #999;font-size: 12px; height: 20px;line-height: 20px;/*overflow: hidden*/}
+.Validform_wrong{color: red;padding-left: 20px;/*white-space: nowrap;*/ background:url(../images/error.png) no-repeat 0 center;}
+.Validform_right{color: #71b83d;padding-left: 20px; background:url(../images/right.png) no-repeat 0 center;}
+#Validform_msg{ display:none;}
+#ttt{position: absolute; border: 0px solid rgb(255, 0, 0); width: 250px; height: 390px; z-index: 1; top: 15%; left: 75%;}
+.dyhImg{margin-left: 33px;}
+.activedetail{position: absolute;top:763px;width: 100px;height:30px;z-index: 1;padding-left: 60px;}
+.fastreq{position: absolute;top:763px;left:700px;width: 100px;height:30px;z-index: 1;}
+.fastreq input{width: 100px;height:30px;-webkit-border-radius: 4px;;-moz-border-radius: 4px;;border-radius: 4px;background:#FF7F50}
+.activedetail input{width: 100px;height:30px;-webkit-border-radius: 4px;;-moz-border-radius: 4px;;border-radius: 4px;background:#FF7F50}
+.bigdiv{background:#EEEEF0;height: 100%;margin: 0px auto;
+max-width:1660px;min-width: 1024px;width:expression(document.body.clientWidth < 1024? "1024px": "auto" );}
+
+
+       

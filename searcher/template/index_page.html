@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load settingsvalue %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>葡萄藤众投</title>
+<link rel="stylesheet" href="/static/css/index_page.css" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<!---左右浮动JS--->
+<!--<script type="text/javascript" src="/static/js/myjs.js"></script>-->
+<!----图片切换JS----->
+<script type="text/javascript">
+		$(function(){
+		    
+		  
+		/*四秒钟换一张*/
+		var a = 0;
+		$(".btn li").click(function(){	
+		 $(".btn li").removeClass("on");
+		 $(this).addClass("on");
+		 a=$(this).index();
+		 $(".banner li a").hide();
+		
+		 $(".banner li a").eq(a).show();
+		});
+		function sroll(){
+			if(a<3){
+			a++;
+			$("#sp2").show();
+			$("#sp3").show();
+				$("#sp4").show();
+			}else{
+			a=0;
+			}
+		 on();	
+		}
+		var timer=setInterval(sroll,4000);
+		$(".banner,.prev,.next").mouseover(function(){
+		  clearInterval(timer);
+		}).mouseout(function(){
+		  timer=setInterval(sroll,4000);
+		})
+		$(".prev").click(function(){
+			if(a>0){
+				a--;
+				$("#sp2").show();
+			}else if(a>1){
+				a=2;
+				$("#sp3").show();
+				}else{
+				a=3;
+				$("#sp4").show();
+			}
+			on();
+			
+		})
+		$(".next").click(function(){
+			if(a<3){
+			a++;
+			$("#sp2").show();
+			$("#sp3").show();
+				$("#sp4").show();
+			}else {
+				a=0;
+		
+			}
+		  on(); 
+
+		});
+	    
+		$('.box').mouseover(function(){
+            $('.prev,.next').addClass('ho');
+            $('.prev,.next').removeClass('ho1');
+            }).mouseout(function(){
+            $('.prev,.next').addClass('ho1');
+            $('.prev,.next').removeClass('ho');
+        })
+		
+		function on(){
+		 $(".btn li").removeClass("on");
+		 $(".btn li").eq(a).addClass("on");
+		 $(".banner li a").hide();
+		 $(".banner li a").eq(a).show();
+		}	
+	})
+	
+	</script>
+</head>
+<body>
+{% include "zcheader.html" %}
+<div class="index_content">
+<!----图片轮番切换----->
+	<div class="box">
+		<ul class="banner" >
+			<li ><a style="display:block;"><img src="/static/images/ztsuccess.jpg" width="100%">
+			</a></li>
+			<li ><a style="display:none;"><img src="/static/images/ztbannel.jpg" style="background: no-repeat" width="100%">
+			</a></li>
+			<li ><a style="display:none;"><img src="/static/images/ztbannel-1.jpg" width="100%">
+			</a></li>
+			<li ><a style="display:none;" href="http://ddbid.com/activearea/"><img src="/static/images/sdbannel.jpg" width="100%">
+			</a></li>
+		</ul>
+		<a class="prev" href="javascript:void(0)"><</a>
+		<a class="next" href="javascript:void(0)">></a>
+	 </div>
+<!----左边浮动图片------->	 
+	<a href="/userinfo/"><div class="fixed"><img src="/static/images/sqtzr.png"/></div></a>
+<!----中间查询内容展示------>
+	<div class="ztmain">
+		<div class="zc-content">
+	    <div class="xujgstyle">
+	        <div class="biaotidiv">
+			    <ul>
+					<li class="btstyle">每日精选</li>
+                    <li class="ckgdstyle"><a href="/project/2">更多每日精选......</a></li>
+              	</ul>
+			</div> 	
+		    <div class="search_bd" id="result_form_jingxuan">
+						{% if daily_selection %}
+						 {% for result in daily_selection %}
+											<div class="resultpage">
+											  <a href="/prodetails/{{result.id}}">
+												 <div style="width:255px;height:310px">
+													<div style="position:absolute;width:255px;height:80px;">
+														 <div class="littleimg">
+															 <img src="/static/images/heart.png" />
+															 <label style="padding-right: 18px;font-weight:bold; color:#FFF;float: right;height:20px;padding-top:3px;">                                                             {{result.click.all|length}}</label>
+														 </div>
+														 <div style="float:right">
+															{% ifequal result.active 1 %}
+															 <div class="jingxuan"> <img src="/static/images/flag.png" /></div>
+															{% else %}
+															 <div style="border:0px solid red;width:38px;height:38px;"></div>
+															{% endifequal %}
+														</div>
+													 </div>
+													<div class="mjzximg"><img src="{{ result.photo_url }}"/></div>
+													<div>
+														<ul class="Cul1">
+															<li style="padding-top:5px;height:20px"><b>{{result.name}}</b></li>
+															<li style="padding-top:5px;">{{result.introduction}}</li>
+															<li id = 'progress_bar'class="index-percent"><div style="width:100%;border:1px solid #868686;border-radius:10px;margin-left:-1em">
+																<em style="width:{{result.invest_num|add_with:result.finish}}%;border-radius:10px;background:url(../static/images/jindutiao.JPG) no-repeat;"></em></div></li>
+
+															<li style="float:left">
+																<label>融资总额:</label><span>{% widthratio result.invest_amount 1 result.invest_num  %}万元</span>
+															</li>
+															<li style="float:right;margin-right:40px;">
+																<label>已完成:</label><span>{% widthratio result.finish result.invest_num 100 %}%</span>
+															</li>
+															<li style="clear:both">
+																<div style="border-top:1px solid #eeeef0; width:200px;height:1px;"></div>
+															</li>
+															<li style="float:left;">
+																<label>已预约融资:</label><span>{% widthratio result.invest_amount 1 result.finish  %}万元</span>
+															</li>
+															<li style="float:right;margin-right:20px">
+																<label>行业:</label><span>{{result.get_category_display}}</span>
+															</li>
+														</ul>
+													</div>
+												 </div>
+											  </a>
+											</div>
+												{% endfor %}
+
+											{% else %}
+
+												<a style="margin-left: 40px;">无符合查询条件的纪录</a>
+											{% endif %}
+			</div>
+		</div>        
+   		
+	    <div class="xujgstyle">
+	        <div class="biaotidiv">
+			    <ul>
+					<li class="btstyle">预热中</li>
+                    <li class="ckgdstyle"><a href="/project/3">更多预热中......</a></li>
+              	</ul>
+			</div> 	
+		    <div class="search_bd" id="result_form_preheat">
+				    {% if preheating %}
+								{% for result in preheating %}
+							<div class="resultpage">
+							  <a href="/prodetails/{{result.id}}">
+								 <div style="width:255px;height:310px">
+									<div style="position:absolute;width:255px;height:80px;">
+										 
+											 <div class="littleimg"> <img src="/static/images/heart.png" />
+											 <label style="padding-right: 18px;font-weight:bold;color:#FFF;height:20px;padding-top:3px;float: right;">
+											 {{result.click.all|length}}</label></div>
+										
+										 <div style="float:right">
+										{% ifequal result.active 1 %}
+										 <div class="jingxuan"> <img src="/static/images/flag.png" /></div>
+										{% else %}
+											 <div class="jingxuan"> <img src="/static/images/rflag.png" /></div>
+										{% endifequal %}
+										</div>
+									 </div>
+									<div class="mjzximg"><img src="{{ result.photo_url }}"/></div>
+									<div>
+										<ul class="Cul1">
+											<li style="padding-top:5px;height:20px"><b>{{result.name}}</b></li>
+											<li style="padding-top:5px;">{{result.introduction}}</li>
+											<li class="index-percent"><div style="width:100%;border:1px solid #868686;border-radius:10px;margin-left:-1em">
+												<em style="width:{{result.invest_num|add_with:result.finish}}%;border-radius:10px;background:url(../static/images/jindutiao.JPG) no-repeat;"></em></div></li>
+											<li style="float:left">
+												<label>融资总额:</label><span>{% widthratio result.invest_amount 1 result.invest_num  %}万元</span>
+											</li>
+											<li style="float:right;margin-right:40px;">
+												<label>已完成:</label><span>{% widthratio result.finish result.invest_num 100 %}%</span>
+											</li>
+											<li style="clear:both">
+												<div style="border-top:1px solid #eeeef0; width:200px;height:1px;"></div>
+											</li>
+											<li style="float:left;">
+												<label>已预约融资:</label><span>{% widthratio result.invest_amount 1 result.finish  %}万元</span>
+											</li>
+											<li style="float:right;margin-right:20px">
+												<label>行业:</label><span>{{result.get_category_display}}</span>
+											</li>
+										</ul>
+									</div>
+								 </div>
+							  </a>
+							</div>
+								{% endfor %}
+
+							{% else %}
+
+								<a style="margin-left: 40px;">无符合查询条件的纪录</a>
+							{% endif %}
+			</div>
+		</div>
+            		
+		<div class="xujgstyle">
+	        <div class="biaotidiv">
+			    <ul>
+					<li class="btstyle">众投中</li>
+                    <li class="ckgdstyle"><a href="/project/4">更多众投中......</a></li>
+              	</ul>
+			</div> 	
+		    <div class="search_bd" id="result_form_manytou">
+				    {% if crowdfunded %}
+											{% for result in crowdfunded %}
+										<div class="resultpage">
+										  <a href="/prodetails/{{result.id}}">
+											 <div style="width:255px;height:310px">
+												<div style="position:absolute;width:255px;height:80px;">
+													 
+														 <div class="littleimg"> <img src="/static/images/heart.png" />
+														 <label style="padding-right: 18px;font-weight:bold; color:#FFF;height:20px;padding-top:3px;float: right;">                                                        {{result.click.all|length}}</label></div>
+													 
+													 <div style="float:right">
+													{% ifequal result.active 1 %}
+													 <div class="jingxuan"> <img src="/static/images/flag.png" /></div>
+													{% else %}
+													 <div style="border:0px solid red;width:38px;height:38px;"></div>
+													{% endifequal %}
+													</div>
+												 </div>
+												<div class="mjzximg"><img src="{{ result.photo_url }}"/></div>
+												<div>
+													<ul class="Cul1">
+														<li style="padding-top:5px;height:20px"><b>{{result.name}}</b></li>
+														<li style="padding-top:5px;">{{result.introduction}}</li>
+														<li class="index-percent"><div style="width:100%;border:1px solid #868686;border-radius:10px;margin-left:-1em">
+															<em style="width:{{result.invest_num|add_with:result.finish}}%;border-radius:10px;background:url(../static/images/jindutiao.JPG) no-repeat;"></em></div></li>
+														<li style="float:left">
+															<label>融资总额:</label><span>{% widthratio result.invest_amount 1 result.invest_num  %}万元</span>
+														</li>
+														<li style="float:right;margin-right:40px;">
+															<label>已完成:</label><span>{% widthratio result.finish result.invest_num 100 %}%</span>
+														</li>
+														<li style="clear:both">
+															<div style="border-top:1px solid #eeeef0; width:200px;height:1px;"></div>
+														</li>
+														<li style="float:left;">
+															<label>已预约融资:</label><span>{% widthratio result.invest_amount 1 result.finish  %}万元</span>
+														</li>
+														<li style="float:right;margin-right:20px">
+															<label>行业:</label><span>{{result.get_category_display}}</span>
+														</li>
+													</ul>
+												</div>
+											 </div>
+										  </a>
+										</div>
+											{% endfor %}
+
+										{% else %}
+
+											<a style="margin-left: 40px;">无符合查询条件的纪录</a>
+										{% endif %}
+			</div>
+		</div>
+            			
+		<div class="xujgstyle">
+	        <div class="biaotidiv">
+			    <ul>
+					<li class="btstyle">众投案例</li>
+                    <li class="ckgdstyle"><a href="/project/5">更多众投案例......</a></li>
+              	</ul>
+			</div>	
+		    <div class="search_bd" id="result_form_manytousucce">
+											    {% if crowdfunded_success %}
+														{% for result in crowdfunded_success %}
+													<div class="resultpage">
+													  <a href="/prodetails/{{result.id}}">
+														 <div style="width:255px;height:310px">
+															<div style="position:absolute;width:255px;height:80px;">
+																 
+																	 <div class="littleimg"> <img src="/static/images/heart.png" />
+																	 <label style="padding-right: 18px;font-weight:bold; color:#FFF;height:20px;padding-top:3px;float: right;">                                                                      {{result.click.all|length}}</label></div>
+																
+																 <div style="float:right">
+																{% ifequal result.active 1 %}
+																 <div class="jingxuan"> <img src="/static/images/flag.png" /></div>
+																{% else %}
+																 <div style="border:0px solid red;width:38px;height:38px;"></div>
+																{% endifequal %}
+																</div>
+															 </div>
+															<div class="mjzximg"><img src="{{ result.photo_url }}"/></div>
+															<div>
+																<ul class="Cul1">
+																	<li style="padding-top:5px;height:20px"><b>{{result.name}}</b></li>
+																	<li style="padding-top:5px;">{{result.introduction}}</li>
+																	<li class="index-percent"><div style="width:100%;border:1px solid #868686;border-radius:10px;margin-left:-1em">
+																		<em style="width:{{result.invest_num|add_with:result.finish}}%;border-radius:10px;background:url(../static/images/jindutiao.JPG) no-repeat;"></em></div></li>
+																	<li style="float:left">
+																		<label>融资总额</label><span>{% widthratio result.invest_amount 1 result.invest_num  %}万元</span>
+																	</li>
+																	<li style="float:left;margin-left:50px;">
+																		<label>已完成</label><span>{% widthratio result.finish result.invest_num 100 %}%</span>
+																	</li>
+																	<li style="clear:both">
+																		<div style="border-top:1px solid #eeeef0; width:200px;height:1px;"></div>
+																	</li>
+																	<li style="float:left;">
+																		<label>已预约融资:</label><span>{% widthratio result.invest_amount 1 result.finish  %}万元</span>
+																	</li>
+																	<li style="float:right;margin-right:20px">
+																		<label>行业:</label><span>{{result.get_category_display}}</span>
+																	</li>
+																</ul>
+															</div>
+														 </div>
+													  </a>
+													</div>
+														{% endfor %}
+
+													{% else %}
+
+														<a style="margin-left: 40px;">无符合查询条件的纪录</a>
+													{% endif %}
+			</div>
+		</div>	
+			      
+		
+	</div>
+	</div>
+<!----右边悬浮框----------->	
+	<div class="side">
+		<div id="right_float">
+			<div class="down">
+				<p class="yidong">
+					<a class="erwei" href="####"></a>
+					<a class="l_r3 l_rw3" href="####" style="width: 0px;"><img src="/static/images/wxcode.png"></a>
+				</p>
+				<p class="yidong">
+					<a class="callphone" href="####"></a>
+					<a class="l_r4 l_rw2" href="####" style="width: 0px;">电话客服:400-709-1818</a>
+				</p>
+				<p class="yidong">
+					<a class="emails" href="####"></a>
+					<a class="l_r5 l_rw5" href="####" style="width: 0px;">公司邮箱:service@ddbid.com</a>
+				</p>
+				<p class="yidong">
+					<a class="address" href="####"></a>
+					<a class="l_r6 l_rw6" href="####" style="width: 0px;">公司地址:上海市沪闵路7866号莲花广场<br>2号楼908室</a>
+				</p>
+				<p class="yidong">
+					<a class="fanhui" href="#"></a>
+					<a class="l_r7 l_rw4" href="#" style="width: 0px;">返回顶部</a>
+				</p>
+			</div>
+		</div>
+	</div>
+ 
+</div>
+
+{% include "footer.html" %}
+
+
+<script>
+	$(document).ready(function(){
+		$('#right_float .yidong').hover(function(){
+
+			$(this).find('.l_rw3').stop().animate({
+				'width':'135px'
+			},400);
+		},function(){
+			$(this).find('.l_rw3').stop().animate({
+				'width':'0px'
+			},400);
+		});
+	});
+	$(document).ready(function(){
+		$('#right_float .yidong').hover(function(){
+			$(this).find('.l_rw2').stop().animate({
+				'width':'170px'
+			},400);
+		},function(){
+			$(this).find('.l_rw2').stop().animate({
+				'width':'0px'
+			},400);
+		});
+	});
+	$(document).ready(function(){
+		$('#right_float .yidong').hover(function(){
+			$(this).find('.l_rw4').stop().animate({
+				'width':'70px'
+			},400);
+		},function(){
+			$(this).find('.l_rw4').stop().animate({
+				'width':'0px'
+			},400);
+		});
+	});
+	$(document).ready(function(){
+		$('#right_float .yidong').hover(function(){
+			$(this).find('.l_rw5').stop().animate({
+				'width':'200px'
+			},400);
+		},function(){
+			$(this).find('.l_rw5').stop().animate({
+				'width':'0px'
+			},400);
+		});
+	});
+	$(document).ready(function(){
+		$('#right_float .yidong').hover(function(){
+			$(this).find('.l_rw6').stop().animate({
+				'width':'250px'
+			},400);
+		},function(){
+			$(this).find('.l_rw6').stop().animate({
+				'width':'0px'
+			},400);
+		});
+	});
+</script>
+</body>
+</html>

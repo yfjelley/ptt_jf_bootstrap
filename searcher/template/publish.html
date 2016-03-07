@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>众筹首页</title>
+<link rel="stylesheet" href="/static/css/zcheader.css" />
+<link  rel="stylesheet"  href="/static/css/publish.css" />
+	<script src="/static/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">  
+		$(function(){
+			$('#daohang').find('li').click(function(){
+				var id =$(this).data('pp');
+				$('#'+id).show().siblings().hide();
+			});
+			
+			$('#bzzx_content').find('li').click(function(){
+				var this_div = $(this).find('div');
+				if(this_div.is(':hidden')){
+					this_div.show();
+				}else{
+					this_div.hide();
+				}
+			});
+				
+			$('#bzzx_content').find('li').mouseover(function(){
+		    	 $(this).find('span').show();
+               	 $(this).find('#donline').show();
+			});
+			$('#bzzx_content').find('li').mouseout(function(){
+			     $(this).find('span').hide();
+				  $(this).find('#donline').hide();
+			});
+			$('#daohang>ul>li a').click(function(){
+  				$('#daohang li a').css('color','#000');
+  				$(this).css('color','#E1604D');
+			});
+			
+			$('.xmbz').find('div').mouseover(function(){
+			     $(this).show();
+			});
+		});
+    </script>  
+
+</head>
+
+<body>
+
+{% include "zcheader.html" %}
+
+<!--内容-->
+<div class="conext">
+    <div class="div11">
+		<div class="div_left" id="daohang">
+			<ul>		   
+				<li> <a href="javascript:void(0);" class="blockColor">&nbsp;&nbsp;创建项目</a></li>
+	<!--
+    
+    			<li data-pp="gyzc"> <a href="javascript:void(0);" class="blockColor">&nbsp;&nbsp;创建项目</a></li>
+                
+				<li data-pp="tzlc"><a href="javascript:;" class="grayColor">2&nbsp;&nbsp;提交审核</a></li>
+				
+				<li data-pp="aqbz"><a href="javascript:;" class="grayColor">3&nbsp;&nbsp;平台审核</a></li>
+				
+				<li data-pp="ptxy"><a href="javascript:;" class="grayColor">4&nbsp;&nbsp;约定协议</a></li>
+				
+				<li data-pp="bzzx"><a href="javascript:;" class="grayColor">5&nbsp;&nbsp;确认发布</a></li>-->
+			</ul>
+		</div>
+		<div class="centerline"></div>
+		<div class="div_right">
+		   <div id="gyzc" class="con_right">   
+		       <div style="padding-top:40px;" class="table_cjxm">
+				   <form class="publishform" action="{% url 'publish' %}" method="post"  enctype="multipart/form-data" >
+					   {% csrf_token %}
+					   <table width="730" align="center" height="600" border="0">
+						   <tr>
+							  <td>项目标志</td>
+							  <td><a href="#"><img src="/static/images/ali.jpg" alt="上传" class="xmbz"/></a></td>
+							  <td> 
+							      <a href="javascript:;" class="a-upload" style="font-size:12px;">
+                                         <input type="file" name="logo" id="" >上传标志
+                                  </a>	
+							  </td>
+							  <td style="width:430px;">
+							  &nbsp产品logo而非公司logo。比如手机App的图标。像素在512×512px以上的正方形标志。支持Jpg、GIF、Png格式，文件不大于2MB;</td>
+						   </tr>
+						   
+						   <tr>
+							  <td>项目名称</td>
+							  <td colspan="3">{{ form.project }}</td>
+						   </tr>
+						   
+						   <tr>
+							  <td>项目简介</td>
+							  <td colspan="3">{{ form.introduction  }}</td>
+						   </tr>
+						   
+						   <tr>
+							  <td>项目描述</td>
+							  <td colspan="3">{{ form.description }}</td>
+						   </tr>
+						   
+						   <tr>
+							  <td>行业领域</td>
+							  <td style="height:30px;" colspan="3">{{ form.category }}</td>
+						   </tr>
+						   
+						   <tr>
+							  <td>项目阶段</td>
+							  <td style="height:30px;" colspan="3">{{ form.status }}</td>
+						   </tr>
+						   
+						   <tr>
+							  <td>创始人</td>
+							  <td colspan="3">{{ form.founder }}</td>
+						   </tr>
+						   
+						   <tr>
+							  <td  style="width:80px">商业计划书</td>
+							  <td>
+							      <a href="javascript:;" class="a-upload" style="font-size:12px;">
+                                    	<input type="file" name="plan" class="jhs">上传计划书
+                                  </a>	
+							  </td>
+							  <td colspan="2">请选择PPT、PPTX、PDF文件，文件大小不要超过20M;</td>
+						   </tr>
+						   
+						   <tr>							  
+							  <td colspan="4"><input  type="checkbox" id="" name=""  value="#"/>
+							  <a href="#" style="color:#e1604d">提交项目视为同意葡萄藤众筹的《服务条款》</a></td>
+						   </tr>
+						   
+							<tr>
+							  
+							  <td colspan="4">
+							     <a href="javascript:;" class="a-upload1" style="font-size:14px;">
+    	                         <input type="submit" style="font-size:12px;"  name="application"  value="">提交待审核
+                                 </a>
+							  </td>
+						   </tr>
+					   
+					   </table>
+					                        														
+				   </form>
+				</div>
+		   </div> 
+	    </div>
+	</div>
+</div>
+
+<!--结尾-->
+{% include "footer.html" %}
+{% if error %}
+    <script>
+        alert('{{ error }}');
+    </script>
+{% else %}
+<script type="text/javascript">
+
+    $(function(){
+        {% if form.project.errors %}
+            {% for error in form.project.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+
+        {% elif form.introduction.errors %}
+            {% for error in form.introduction.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+
+        {% elif form.description.errors %}
+            {% for error in form.description.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+
+        {% elif form.founder.errors %}
+            {% for error in form.founder.errors %}
+                alert('{{ error }}');
+            {% endfor %}
+        {% endif %}
+    });
+</script>
+{% endif %}
+</body>
+</html>

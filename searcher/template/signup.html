@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block index %}
+<style>
+	.mod-head {text-align: center;margin-top:50px;margin-bottom:30px;}
+    #register .row {background-color:#FFFFFF;margin-top:60px;padding-bottom:80px;}
+	#register .login {float:right;}
+	#register .checkbox {padding-top:0px;}
+
+
+</style>
+
+<div class="container" id="register">
+	<div class="row" >
+		<div class="mod-head">
+			<h2>注册新用户</h2>
+		</div>
+		<div class="mod-body">
+			<form class="form-horizontal" action="{% url 'register' %}" method="post" name="form1">
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-4">
+					  {{ form.username }}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-4">
+						{{ form.password }}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-4">
+						{{ form.password2 }}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-4">
+						{{ form.extend }}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-4">
+						{{ form.vcode }}
+					</div>
+					<div class="col-sm-1">
+						<img onclick="this.setAttribute('src',{% url 'verifycode' %} + '?nocache='+Math.random());"
+																		src="{% url 'verifycode' %}"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 col-sm-offset-4">
+						{{ form.smscode }}
+					</div>
+					<div class="col-sm-2 ">
+					  <input type="button" class="btn btn-info btn-block" value="发送验证码" />
+					</div>
+				</div>
+				  <div class="form-group">
+					<div class="col-sm-offset-4 col-sm-2">
+					  <div class="checkbox">
+						<label>
+						  <input type="checkbox">我同意<a href="#">用户协议</a>
+						</label>
+					  </div>
+					</div>
+					<div class="col-sm-2">
+					  <div class="login">
+						  <a href="{% url 'login' %}">已有账号登录</a>
+					  </div>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<div class="col-sm-offset-4 col-sm-4 ">
+					  <button type="submit" class="btn btn-primary btn-block">立即注册</button>
+					</div>
+				  </div>
+			</form>
+		</div>
+		<div class="mod-footer"></div>
+	</div>
+</div>
+
+
+{% endblock %}

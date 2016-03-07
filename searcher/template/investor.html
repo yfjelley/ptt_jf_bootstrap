@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block index %}
+<style>
+	#project {background-color:#FFFFFF;margin-top:40px;}
+	#detail {background-color:#FFFFFF;margin-top:30px;padding-top:30px;padding-bottom:30px;}
+    #project .col-sm-10 {padding:10px;}
+	#project a {margin:10px;}
+	#category {padding-top:0px;}
+	#project .login {float:right;}
+	#project .checkbox {padding-top:0px;}
+	#project .img-thumbnail {max-width:45%;margin-top:2px;float:right;border:0px;}
+</style>
+<div class="container" id="project">
+	<div class="row" >
+		<div class="col-sm-10">
+            <label>投资人类别:</label>
+            <a class="btn_blue" href="#" choiceid="1"> 不限</a>
+            <a href="javascript:void(0)" choiceid="2">认证投资人</a>
+            <a href="javascript:void(0)" choiceid="3">资深投资人</a>
+		<br>
+		<div style="width:800px;height:1px; background:#EEEEF0;margin-bottom:5px;"></div>
+            <label>行业类别&nbsp;:</label>
+             <a class="btn_blue" href="javascript:void(0)" choiceid="4"> 不限</a>
+             <a href="javascript:void(0)"   choiceid="5">移动互联</a>
+              <a href="javascript:void(0)"   choiceid="6">节能环保</a>
+              <a href="javascript:void(0)" choiceid="7"> 文化传媒</a>
+              <a href="javascript:void(0)"   choiceid="8">新材料</a>
+              <a href="javascript:void(0)"   choiceid="9">新能源</a>
+              <a href="javascript:void(0)" choiceid="10"> 生物制药</a>
+              <a href="javascript:void(0)"   choiceid="11">消费服务</a>
+              <a href="javascript:void(0)" choiceid="12">信息技术</a>
+              <a href="javascript:void(0)" choiceid="13">其他</a>
+		</div>
+		<div class="col-sm-2">
+			<img src="/static/images/Rlogo.png" class="img-thumbnail">
+		</div>
+	</div>
+</div>
+<div class="container" id="detail">
+	<div class="row">
+		{% if result %}
+		{% for i in result %}
+	  <div class="col-xl-6 col-sm-4">
+		<div class="thumbnail">
+		  <img src="{{ i.photo_url }}" class="img-thumbnail" >
+		  <div class="caption">
+			<h3>{{i.name}}</h3>
+			<p>{{result.introduction}}</p>
+			<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+		  </div>
+		</div>
+	  </div>
+		{% endfor %}
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

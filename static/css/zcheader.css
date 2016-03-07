@@ -1,0 +1,71 @@
+body,ul{margin:0}
+a{text-decoration: none}
+.ul7{margin-left:17%;}
+.ul7 a{text-decoration:none;color:#FFFFFF;font-size:18px;}
+.ul7 a:hover{color:#e1604d;cursor:pointer;}
+/*.ul7 li.active{background: #cc282a}border-bottom: 2px solid #e1604d;padding:6px 0*/
+.ul7 li{list-style:none;float:left;padding:0 20px;text-align: center}
+
+.ul8 a{text-decoration:none;color:#FFFFFF;margin:0 10px;}
+.ul8 a:hover{color:#e1604d;cursor:pointer;}
+.ul8{ margin-top:-70px;font-size:16px;color:#FFFFFF;float:left;margin-left: 66%;}
+#container{	background-color:#372c3a;height:70px;width:100%;min-width: 1440px;max-width:1660px;line-height: 70px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;}
+.TopclickTag{color:#e1604d;cursor:pointer;border-bottom: 2px solid #e1604d;padding:6px 0}
+li{list-style:none;}
+.logreg_name{margin-left:120px;position:absolute;width: 152px}
+.logreg_name a{color:#FFFFFF;}
+.logreg_name a:hover{color:#e1604d;cursor:pointer;}
+#top_r li{ float:left; position:relative; margin:0 5px;height: 50px;}
+#top_r li a{color:#ccc;font-size:14px;}
+#top_r li a:hover{ color:#ff0000;}
+#top_r ul{ display:none; width:200px;  padding:10px; box-shadow: 0px 0px 2px #DDD;
+background: none repeat scroll 0% 0% #FFF; z-index:999; position:absolute; right:-30px; top:48px;}
+#top_r ul li{ width:190px; height:30px; line-height:30px;}
+.top_name{margin-top:20px;margin-left:100px;position:absolute;width: 165px}
+.top_name li{ height:30px; line-height:30px; color:#ccc;}
+.top_name li img{ margin-top:3px; float:left; margin-left:15px; width:24px; height:24px;}
+.top_name ul{ background:rgba(0,0,0,0.6)!important; width:100px!important; }
+.seacher-btn{border:1px solid white; border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;position:relative;top:1px;}
+.seacher-text{border:1px solid white; border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;margin-left:-10px;}
+.seacher-sele{border:1px solid white; border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px; height:21px; padding:0px;margin-right: 10px;}
+/*头部搜索按钮样式*/
+.putIn{
+    position:relative;
+    z-index: 1;
+    padding:5px 0 0 10px;
+    width:62px;
+    height:24px;
+    border: 0;
+    background: none;
+    font-family:"microsoft yahei";
+    font-size:12px;
+}
+.dropBtn{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:2;
+    margin:0;
+    width:58px;
+    height:24px;
+    background: none;
+}
+
+.dropDown{
+    position:absolute;padding:0;width:60px;height:35px;line-height:24px;color:#999;border:0;border-left:#d2d2d2 solid 1px;overflow:visible;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;
+    background:#f8f8f8;border-bottom: 1px solid #ddd;-moz-box-shadow:0 0 3px rgb(241,241,241);-webkit-box-shadow:0 0 3px rgb(241,241,241);box-shadow:0 0 3px rgb(241,241,241);;margin-left:-159px;z-index: 999;margin-top:17px;
+}
+.btn-search{
+    width:78px;height:36px;line-height:36px;color:#fff;font-size:14px;overflow:hidden;background:#00b7ee;border: 0 none;cursor: pointer;font-family:"microsoft yahei";/*margin-right:251px;margin-top:65px;*/
+    float:right;
+    margin-top: 17px;
+}
+.ipt-search{float: left;text-indent:35px;width: 150px;height: 32px;line-height: 32px;background:url(/static/images/searchsub.png) no-repeat top left;border:#d2d2d2 solid 1px;border-right:0;font-size:14px;font-family:"microsoft yahei";outline: none;margin-left:-98px;color:black;background-color:rgb(241,241,241);margin-top:17px;}
+.dropDown .dropBtn s{position:absolute;top:14px;right:1px;width:8px;height:6px;background:url(/static/images/sprits.png) no-repeat -67px -183px;}
+.dropDown .dropList{display:none;position:absolute;top:37px;left:-1px;width:59px;border:#69bcf7 solid 1px;background:#fff;list-style-type:none;padding:0}
+.dropDown .dropList li{padding:0 0 0 10px;height:25px;line-height:25px;cursor:pointer;color:#333; font-family:"microsoft yahei";font-size:12px}
+.dropDown .dropList li:hover{background:#69bcf7;color:#fff;}
+
