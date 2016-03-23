@@ -356,7 +356,18 @@ def auth_register(request):
     return HttpResponse()
 
 
-@login_required
+def safe_center(request):
+    return render_to_response('safe_center.html', context_instance=RequestContext(request))
+def manage(request):
+    return render_to_response('manage.html', context_instance=RequestContext(request))
+def authentication(request):
+    return render_to_response('authentication.html', context_instance=RequestContext(request))
+def info(request):
+    return render_to_response('info.html', context_instance=RequestContext(request))
+def invitation(request):
+    return render_to_response('invitation.html', context_instance=RequestContext(request))
+
+
 def userinfo(request,objectid=None):
     url = None
     user = auth.get_user(request)
@@ -768,6 +779,29 @@ def guide(request):
 
     return render_to_response('guide.html',{"p1":p1[0].agreement,"description":p[0].about_zhongtou}, context_instance=RequestContext(request))
 
+
+def join(request):
+    p = About_us.objects.filter(name=u"上海辞达金融信息服务有限公司")
+    mediareports = MediaReports.objects.filter(status=1)
+    return render_to_response('join.html',{'mediareports':mediareports,"description":p[0].description}, context_instance=RequestContext(request))
+
+
+def contact(request):
+    p = About_us.objects.filter(name=u"上海辞达金融信息服务有限公司")
+    mediareports = MediaReports.objects.filter(status=1)
+    return render_to_response('contact.html',{'mediareports':mediareports,"description":p[0].description}, context_instance=RequestContext(request))
+
+
+def partner(request):
+    p = About_us.objects.filter(name=u"上海辞达金融信息服务有限公司")
+    mediareports = MediaReports.objects.filter(status=1)
+    return render_to_response('partner.html',{'mediareports':mediareports,"description":p[0].description}, context_instance=RequestContext(request))
+
+def media(request):
+    p = About_us.objects.filter(name=u"上海辞达金融信息服务有限公司")
+    mediareports = MediaReports.objects.filter(status=1)
+    return render_to_response('media.html',{'mediareports':mediareports,"description":p[0].description}, context_instance=RequestContext(request))
+
 #@login_required
 def publish(request):
     user = auth.get_user(request)
@@ -1032,8 +1066,9 @@ def project(request):
     #web(14：不限，15：金融在线，16：电子商务, 17: 医疗, 18: 互联网, 19: 社交，20：生活服务)
     #sql(14：不限，15：金融在线，16：电子商务, 17: 医疗, 18: 互联网, 19: 社交，20：生活服务)
     search_word = request.GET.getlist('search_word[]')
-    print request,search_word
+    print "yyyyyyyyyy"
     if search_word:
+        print "dddddd"
         if int(search_word[1]) == 14 and int(search_word[0]) != 1 :
             if int(search_word[0]) == 2 :
                 results = Project.objects.filter(active=1)
@@ -1056,7 +1091,7 @@ def project(request):
         else:
             results = Project.objects.all()
 
-        ppp = Paginator(results, 20)
+        ppp = Paginator(results, 2)
         try:
                 page = int(request.GET.get('page', '1'))
         except ValueError:
@@ -1076,20 +1111,7 @@ def project(request):
             }
         return HttpResponse(json.dumps(payload), content_type="application/json")
     else :
-        results = Project.objects.all()
-
-    ppp = Paginator(results, 2)
-    try:
-        page = int(request.GET.get('page', '1'))
-    except ValueError:
-        page = 1
-    try:
-        results = ppp.page(page)
-    except (EmptyPage, InvalidPage):
-        results = ppp.page(ppp.num_pages)
-    last_page = ppp.page_range[len(ppp.page_range) - 1]
-    page_set = get_pageset(last_page, page)
-    return render_to_response('project.html',{'results': results, 'last_page': last_page, 'page_set': page_set}, context_instance=RequestContext(request))
+        return render_to_response('project.html',{}, context_instance=RequestContext(request))
 
 
 def invest_pr(request,objectid):

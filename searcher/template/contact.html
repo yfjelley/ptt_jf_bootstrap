@@ -1,0 +1,12 @@
+{% extends 'guide_base.html' %}
+{% block navigation %}
+{% include 'navigation.html' %}
+{% endblock %}
+{% block content %}
+    <div id="contact" >
+        <div class="page-header">
+           <h3>联系方式</h3>
+        </div>
+        <p>{{description|safe}}</p>
+    </div>
+{% endblock %}

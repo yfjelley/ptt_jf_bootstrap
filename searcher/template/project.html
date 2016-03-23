@@ -4,6 +4,7 @@
 	#project {background-color:#FFFFFF;margin-top:40px;padding:20px;}
 	#detail {background-color:#FFFFFF;margin-top:30px;padding-top:30px;padding-bottom:30px;}
 	#pagination nav {float:right;}
+	#pagination {margin-right:auto;margin-left:auto;display:table;width:auto;}
     #project .col-sm-10 {padding:10px;}
 	#project a {margin:10px;}
 	#category {padding-top:0px;}
@@ -42,49 +43,17 @@
 	</div>
 </div>
 <div class="container" id="detail">
-	<div class="row">
-		{% if results %}
-			{% for i in results %}
-				  <div class="col-xl-6 col-sm-3">
-					<div class="thumbnail">
-					  <img src="{{ i.photo_url }}" class="img-responsive" >
-					  <div class="caption">
-						<h3>{{i.name}}</h3>
-						<p>{{result.introduction}}</p>
-						<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-					  </div>
-					</div>
-				  </div>
-			{% endfor %}
-		{% endif %}
-	</div>
-	<div class="row" id="pagination">
-		<div class="page-control">
-			<ul class="pagination pull-right">
-				<li><a href="javascript:void(0)" onclick="takepage(1)">&lt;&lt;</a></li>
-				{% if results.has_previous %}
-				<li><a href="javascript:void(0)" onclick="takepage({{ results.previous_page_number }})">&lt;</a></li>
-				{% endif %}
-				{% for page in page_set %}
-					<li {% ifequal page results.number %} class="active" {% endifequal %}><a href="javascript:void(0)"    onclick="takepage({{ page }})">{{page}}</a></li><li>
-				{% endfor %}
-				{% if results.has_next %}
-				<li><a href="javascript:void(0)" onclick="takepage({{ results.next_page_number }})">&gt;</a></li>
-				{% endif %}
-				<li><a href="javascript:void(0)" onclick="takepage({{ last_page }})">&gt;&gt;</a></li>
-			</ul>
-		</div>
-
-	</div>
 </div>
 {% endblock %}
 
 {% block script %}
     <script>
+   $(document).ready(function(){
+       takepage(1);
+   })
    $('#project .row').find('a').on("click",function(){
 	   $(this).addClass("label label-danger").siblings("a").removeClass("label label-danger");
-	   var a = getElementsByClassName('label label-danger','choiceid');
-       checkparam(1,a);
+       takepage(1);
    });
 
    function takepage(n) {
@@ -92,13 +61,13 @@
         checkparam(n,a);
    }
    function checkparam(page,a) {
-        $.post("{% url 'project' %}",
+        $.get("{% url 'project' %}",
                 {
                     page: page,
                     search_word: a,
                 },
                 function (data) {
-                    $('#result_form').html(data.content_html);
+                    $('#detail').html(data.content_html);
                 }
         );
     }

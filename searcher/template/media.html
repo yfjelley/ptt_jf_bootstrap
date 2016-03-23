@@ -1,0 +1,21 @@
+{% extends 'guide_base.html' %}
+{% block navigation %}
+{% include 'navigation.html' %}
+{% endblock %}
+{% block content %}
+			<div id="media" >
+				<div class="page-header">
+				   <h3>媒体报道</h3>
+				</div>
+				<dl class="dl-horizontal">
+					{% if mediareports %}
+					{% for i in mediareports %}
+				    	<a target="_blank" href="{{i.url}}">
+							<dt >{{i.title}}</dt>
+						</a>
+						<dd>{{i.add_date|date:"Y-m-j  H:i:s"}}</dd>
+					{% endfor %}
+					{% endif %}
+				</dl>
+			</div>
+{% endblock %}
