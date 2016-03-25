@@ -377,7 +377,7 @@ def userinfo(request,objectid=None):
         form  = UserInformationForm(request.POST)
         print form
         f = request.FILES.get('file',None)
-        print f
+        print "ddddddddd"
         if f:
             print "xwwwwx"
             extension = os.path.splitext(f.name)[-1]
@@ -387,8 +387,8 @@ def userinfo(request,objectid=None):
             if (extension not in ['.jpg', '.png', '.gif', '.JPG', '.PNG', '.GIF']) or ('image' not in f.content_type):
                 msg = u"图片格式必须为jpg，png，gif"
             if msg:
-                return render_to_response("userinfo.html", {'form': form,'error': msg},
-                                          context_instance=RequestContext(request))
+                return HttpResponse()
+
 
             im = Image.open(f)
             im.thumbnail((120, 120))
@@ -397,6 +397,11 @@ def userinfo(request,objectid=None):
             im.save('%s/%s' % (storage.location, name), 'PNG')
             url = storage.url(name)
             print url
+        # return render_to_response("userinfo.html",context_instance=RequestContext(request))
+        payload = {
+                    'Success': True,
+                }
+        return HttpResponse(json.dumps(payload), content_type="application/json")
         if form.is_valid():
             try:
                 u_i = UserInformation.objects.get(user=user)
