@@ -29,7 +29,7 @@ from searcher.forms import ContactForm, SearchForm, LoginForm, UserInformationFo
 from searcher.inner_views import index_loading, data_filter, result_sort, get_pageset, get_user_filter, user_auth, \
     refresh_header,send_flow_all,user_get_ip
 from searcher.models import Bid, UserFavorite, Platform, UserInformation, DimensionChoice, UserFilter, UserReminder, \
-    WeekHotSpot, BidHis, ReminderUnit, About_us, Partners, Frendlink, Project,project_forum,Signal,MediaReports,invest_detail,Extend
+    WeekHotSpot, BidHis, ReminderUnit, About_us, Partners, Frendlink, Project,project_forum,Signal,MediaReports,invest_detail,Extend,HobbiesForm
 from ddbid import conf
 from django.db.models import Q
 import simplejson
@@ -800,7 +800,8 @@ def contact(request):
 def partner(request):
     p = About_us.objects.filter(name=u"上海辞达金融信息服务有限公司")
     mediareports = MediaReports.objects.filter(status=1)
-    return render_to_response('partner.html',{'mediareports':mediareports,"description":p[0].description}, context_instance=RequestContext(request))
+    form = HobbiesForm()
+    return render_to_response('partner.html',{'form':form,'mediareports':mediareports,"description":p[0].description}, context_instance=RequestContext(request))
 
 def media(request):
     p = About_us.objects.filter(name=u"上海辞达金融信息服务有限公司")
