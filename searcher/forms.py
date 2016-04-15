@@ -392,20 +392,20 @@ class UserInformationForm(ModelForm):
         fields = ('cate','nickname', 'gender', 'birthday', 'cellphone', 'email', 'city', 'address', 'education',
                   'monthly_income', 'marriage', 'qq_num', 'wechat_num', 'weibo_num')
         widgets = {
-            'cate': forms.Select(attrs={'class': 'user_select'}),
-            'nickname': forms.TextInput(attrs={'class': 'user_text'}),
+            'cate': forms.Select(attrs={'class': 'form-control'}),
+            'nickname': forms.TextInput(attrs={'class': 'form-control'}),
             'gender': forms.RadioSelect(renderer=MyCustomRenderer, attrs={'class': 'user_radio'}),
-            'birthday': forms.TextInput(attrs={'class': 'user_text'}),
-            'cellphone': forms.TextInput(attrs={'class': 'user_text'}),
-            'email': forms.EmailInput(attrs={'class': 'user_text'}),
-            'city': forms.TextInput(attrs={'class': 'user_text'}),
-            'address': forms.TextInput(attrs={'class': 'user_text'}),
-            'education': forms.Select(attrs={'class': 'user_select'}),
-            'monthly_income': forms.Select(attrs={'class': 'user_select'}),
+            'birthday': forms.TextInput(attrs={'class': 'form-control'}),
+            'cellphone': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'education': forms.Select(attrs={'class': 'form-control'}),
+            'monthly_income': forms.Select(attrs={'class': 'form-control'}),
             'marriage': forms.RadioSelect(renderer=MyCustomRenderer, attrs={'class': 'user_radio'}),
-            'qq_num': forms.TextInput(attrs={'class': 'user_text'}),
-            'wechat_num': forms.TextInput(attrs={'class': 'user_text'}),
-            'weibo_num': forms.TextInput(attrs={'class': 'user_text'}),
+            'qq_num': forms.TextInput(attrs={'class': 'form-control'}),
+            'wechat_num': forms.TextInput(attrs={'class': 'form-control'}),
+            'weibo_num': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
     def clean_qq_num(self):

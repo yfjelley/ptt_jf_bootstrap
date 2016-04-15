@@ -373,13 +373,9 @@ def userinfo(request,objectid=None):
     user = auth.get_user(request)
     flag = 1
     if request.method == 'POST':
-        print "xxxx"
         form  = UserInformationForm(request.POST)
-        print form
         f = request.FILES.get('file',None)
-        print "ddddddddd"
         if f:
-            print "xwwwwx"
             extension = os.path.splitext(f.name)[-1]
             msg = None
             if f.size > 1048576:
@@ -423,32 +419,8 @@ def userinfo(request,objectid=None):
             form = UserInformationForm(instance=user.userinformation)
         except ObjectDoesNotExist:
             form = UserInformationForm()
-        #领投项目
 
-        leader  = invest_detail.objects.filter(invest_user=request.user)
-
-        #跟投项目
-        invest = Project.objects.filter(investor=request.user)
-
-        #我发布的项目
-        publish_pr = Project.objects.filter(publish=user)
-        #我关注的项目
-        attention_pr =   Project.objects.filter(click=user)
-        #我关注的人
-        u = User.objects.get(username=request.user)
-
-        attention_persion = u.userinformation.attention_persion.all()
-
-        signal =  Signal.objects.filter(who=request.user).order_by("-add_date")[0:6]
-        notice = Signal.objects.filter(type=0).order_by("-add_date")[0:6]
-
-        extend = Extend.objects.filter(extend_user=request.user)
-        if extend:
-            extend = extend[0]
-        print extend
-
-    return render_to_response("userinfo.html", {"extend":extend,"notice":notice,"signal":signal,'form': form,"leader":leader,"invest":invest,\
-                                                "publish_pr":publish_pr,"attention_pr":attention_pr,"attention_persion":attention_persion},
+    return render_to_response("userinfo.html", {'form': form},
                               context_instance=RequestContext(request))
 def generate(request):
     for i in range(1,10):
@@ -1072,9 +1044,9 @@ def project(request):
     #web(14：不限，15：金融在线，16：电子商务, 17: 医疗, 18: 互联网, 19: 社交，20：生活服务)
     #sql(14：不限，15：金融在线，16：电子商务, 17: 医疗, 18: 互联网, 19: 社交，20：生活服务)
     search_word = request.GET.getlist('search_word[]')
-    print "yyyyyyyyyy"
+
     if search_word:
-        print "dddddd"
+
         if int(search_word[1]) == 14 and int(search_word[0]) != 1 :
             if int(search_word[0]) == 2 :
                 results = Project.objects.filter(active=1)
@@ -1117,7 +1089,19 @@ def project(request):
             }
         return HttpResponse(json.dumps(payload), content_type="application/json")
     else :
-        return render_to_response('project.html',{}, context_instance=RequestContext(request))
+        results = Project.objects.all()
+        ppp = Paginator(results, 2)
+        try:
+                page = int(request.GET.get('page', '1'))
+        except ValueError:
+                page = 1
+        try:
+                results = ppp.page(page)
+        except (EmptyPage, InvalidPage):
+                results = ppp.page(ppp.num_pages)
+        last_page = ppp.page_range[len(ppp.page_range) - 1]
+        page_set = get_pageset(last_page, page)
+        return render_to_response('project.html',{'results': results, 'last_page': last_page, 'page_set': page_set}, context_instance=RequestContext(request))
 
 
 def invest_pr(request,objectid):
