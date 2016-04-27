@@ -374,41 +374,17 @@ def userinfo(request,objectid=None):
     flag = 1
     if request.method == 'POST':
         form  = UserInformationForm(request.POST)
-        f = request.FILES.get('file',None)
-        if f:
-            extension = os.path.splitext(f.name)[-1]
-            msg = None
-            if f.size > 1048576:
-                msg = u"图片大小不能超过1MB"
-            if (extension not in ['.jpg', '.png', '.gif', '.JPG', '.PNG', '.GIF']) or ('image' not in f.content_type):
-                msg = u"图片格式必须为jpg，png，gif"
-            if msg:
-                return HttpResponse()
 
-
-            im = Image.open(f)
-            im.thumbnail((120, 120))
-            name = 'p_user' + storage.get_available_name(str(user.id)) + '.png'
-            print name
-            im.save('%s/%s' % (storage.location, name), 'PNG')
-            url = storage.url(name)
-            print url
-        # return render_to_response("userinfo.html",context_instance=RequestContext(request))
-        payload = {
-                    'Success': True,
-                }
-        return HttpResponse(json.dumps(payload), content_type="application/json")
         if form.is_valid():
             try:
                 u_i = UserInformation.objects.get(user=user)
                 form1 = UserInformationForm(request.POST, instance=u_i)
                 u_i = form1.save(commit=False)
-                if url:
-                    u_i.photo_url = url
+
             except ObjectDoesNotExist:
                 u_i = form.save(commit=False)
                 u_i.user = user
-                u_i.photo_url = url
+
             u_i.save()
         else:
             return render_to_response("userinfo.html", {'form': form, 'flag': flag},
@@ -432,7 +408,7 @@ def generate(request):
             break
     return HttpResponse()
 
-@login_required
+
 def userinformation(request):
     url = None
     user = auth.get_user(request)

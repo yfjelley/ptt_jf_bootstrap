@@ -1,0 +1,362 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* 防止点击闪烁 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* 缩放网页，文字大小不变 */
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    background-color: #EEEEF0;
+}
+
+html {
+    background: none;
+}
+
+h1 {
+    font-size: 16px;
+}
+
+h2 {
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+    border: 1px solid #fff;
+    line-height: 0.6rem;
+    padding: 0.2rem;
+    background: #ced3d7;
+    overflow: hidden;
+}
+.tabs-cont .img1{
+    width: 1.4rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    display: block;
+    text-align: justify;
+    float: right;
+
+}
+.main {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%
+}
+
+.head {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: center;
+    background-color: #fff;
+}
+
+.head p {
+    flex: 1;
+    -webkit-box-flex: 1;
+
+}
+
+.wrap .head img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.wrap .head .file {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 0;
+    line-height: 0.8rem;
+    background: #999999;
+    width: 2rem;
+    height: 0.8rem;
+    color: #fff;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wrap .head .file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+#tabs {
+    overflow: hidden;
+}
+
+.tabs-nav {
+    overflow: hidden;
+}
+
+.tabs-nav li {
+    width: 25%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background: #959290;
+    float: left;
+    text-align: center;
+    color: #fff;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.tabs-nav li.current {
+    background: #FE4902;
+}
+
+.tabs-cont {
+    display: none;
+}
+
+.wrap .tabs-cont .invest-friend canvas {
+    width: 4rem;
+    padding: 0.2rem;
+}
+
+.tabs-cont .start-pro {
+    background-color: #ffffff;
+    overflow: hidden;
+    margin: 0.4rem 0;
+}
+
+.tabs-cont .start-pro .number {
+    font-weight: bold;
+    color: #000;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.tabs-cont .start-pro li {
+    float: left;
+    padding: 0.4rem 0.1rem;
+}
+
+.tabs-cont .focus-pro {
+    background-color: #ffffff;
+    overflow: hidden;
+    margin: 0.4rem 0;
+}
+
+.tabs-cont .focus-pro .number {
+    font-weight: bold;
+    color: #000;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.tabs-cont .focus-pro li {
+    float: left;
+    padding: 0.4rem 0.1rem;
+}
+
+.tabs-cont.current {
+    display: block;
+}
+
+.wrap .tabs-cont .user-input input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .focus-indus select {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .birth input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .email-address input[type="email"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .live-city input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .live-address input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .education select {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .moth-income select {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .marr-state select {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .weixin input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .qq input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .weibo input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .code-img img {
+    width: 2.4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont td {
+    padding: 0.2rem 0.5rem;
+}
+
+.wrap .tabs-cont .new-call input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .code input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .message-code input[type="text"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .send-code input[type="button"] {
+    width: 2rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .new-pwd input[type="password"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .tabs-cont .con-pwd input[type="password"] {
+    width: 4rem;
+    height: 0.6rem;
+}
+
+.wrap .user-con .user-submit input[type="submit"] {
+    width: 2.4rem;
+    height: 0.6rem;
+    border: 0 none;
+    background-color: #660000;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wrap .tabs-cont .tab-self {
+    background-color: #ffffff;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.wrap .tabs-cont .tab-self input[type="button"] {
+    width: 2.4rem;
+    height: 0.6rem;
+    border: 0 none;
+    background-color: #660000;
+    color: #fff;
+}
+
+.wrap .tabs-cont .invest-friend p {
+    padding: 0.2rem;
+}
+.wrap .tabs-cont .invest-friend p input[type="button"] {
+    width: 4rem;
+    height: 0.6rem;
+    background-color: #660000;
+    color: #fff;
+    border: 0 none;
+}
+.invest_inp input[type="text"] {
+    width: 7rem;
+    height: 0.6rem;
+}
+
+[data-dpr="2"] h2 {
+    font-size: 36px;
+}
+
+[data-dpr="2"] .wrap .tabs-cont .focus-indus select option {
+    font-size: 14px;
+}
+
+[data-dpr="2"] .wrap .tabs-cont .education select option {
+    font-size: 14px;
+}
+
+[data-dpr="2"] .wrap .tabs-cont .moth-income select option {
+    font-size: 14px;
+}
+
+.wrap .tabs-cont .txt {
+    font-size: 32px;
+    line-height: 1.43;
+    font-weight: bold;
+    color: #000;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+[data-dpr="1"] .wrap .tabs-cont .txt {
+    font-size: 16px;
+    line-height: 1.43;
+    font-weight: bold;
+    color: #000;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+[data-dpr="3"] .wrap .tabs-cont .txt {
+    font-size: 36px;
+    line-height: 1.43;
+    font-weight: bold;
+    color: #000;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+[data-dpr="3"] h2 {
+    font-size: 32px;
+}
+
+[data-dpr="3"] .wrap .tabs-cont .focus-indus select option {
+    font-size: 8px;
+}
+
+[data-dpr="3"] .wrap .tabs-cont .education select option {
+    font-size: 8px;
+}
+
+[data-dpr="3"] .wrap .tabs-cont .moth-income select option {
+    font-size: 8px;
+}

@@ -1,0 +1,32 @@
+.content{width:100%;height:650px;background-color:#eeeef0; margin-top:-2px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;min-width: 1440px;max-width:1660px;}
+.touziren{margin-top:10px; margin-left:-15px;}
+.touziren li{margin:10px 0px;}
+.content1{width:750px;height:500px; background-color:#FFFFFF; margin-left:260px;margin-top:50px; position:absolute;z-index:1}
+.tabul{float:left; margin-top:40px; margin-left:-22px;}
+.tabul li{margin:5px 15px;}
+.tabul a{text-decoration:none;color:#000000;}
+.tabul a:link,a:visited{ border-bottom-style:solid; border-color:transparent; border-width:2px;}
+.tabul a:hover{ border-color:#e1604d;font-weight:bold; cursor:pointer;}
+.tabul2 li{margin:0px 15px}
+.tabul2 a{text-decoration:none;color:#000000;}
+.tabul2 a:link,a:visited{ border-bottom-style:solid; border-color:transparent; border-width:2px;}
+.tabul2 a:hover{ border-color:#e1604d;font-weight:bold; cursor:pointer;}
+.div_right{width:600px; height:150px; margin-top:250px; margin-left:-10px;}
+.content2{width:200px;height:500px;background-color:#FFFFFF;position:absolute;z-index:1;margin-left:1100px; margin-top:50px;}
+.div_right2{width:200px; height:500px;}
+.gzPeople label{margin-left:-100px;}
+.gzPeople{margin-left:-5px}
+.fsPeople img{width:40px;height:40px;}
+.fsPeople{margin-left:-5px}
+.fsPeople li{float:left}
+.gzPeople img{width:40px;height:40px;}
+.gzPeople li{float:left}
+.display{display:none}
+.invest_img_list{float: left;margin-top:10px;}
+.invest_img_list li{padding:5px 0}
+.list_img1{margin-top:-20px;margin-left:60px;}
+.list_img2{margin-left:60px;}
+.list_img3{margin-left:60px;}
