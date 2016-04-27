@@ -359,7 +359,9 @@ def auth_register(request):
 def safe_center(request):
     return render_to_response('safe_center.html', context_instance=RequestContext(request))
 def manage(request):
-    return render_to_response('manage.html', context_instance=RequestContext(request))
+    u = User.objects.get(username='15721448969')
+    leader = u.invest_user_set.all()
+    return render_to_response('manage.html',{'leader':leader}, context_instance=RequestContext(request))
 def authentication(request):
     return render_to_response('authentication.html', context_instance=RequestContext(request))
 def info(request):

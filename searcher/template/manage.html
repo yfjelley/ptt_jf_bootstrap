@@ -3,16 +3,51 @@
 {% include 'navigation_userinfo.html' %}
 {% endblock %}
 {% block content %}
-<div class="row" style="margin:0px;padding:0px;">
-    <div class="col-sm-12 " >
-    <h2 class="center-block" style="margin-top:0px;margin-bottom:0px;">项目管理</h2>
-    </div>
-</div>
-    <hr style="margin-top:10px;margin-bottom:10px;">
 
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">已投项目</a></li>
-    <li role="presentation"><a href="#">关注的项目</a></li>
-    <li role="presentation"><a href="#">关注的人</a></li>
+<h2 class="center-block" style="margin-top:0px;margin-bottom:0px;">项目管理</h2>
+
+<hr style="margin-top:10px;margin-bottom:10px;">
+
+<ul class="nav nav-tabs" style="margin-bottom: 30px;">
+    <li role="presentation"  data-dd="invested" onclick="showContent()" class="active"><a href="#">已投项目</a></li>
+    <li role="presentation" data-dd="focus" onclick="showContent()"><a href="#">关注的项目</a></li>
+    <li role="presentation" data-dd="people" onclick="showContent()"><a href="#">关注的人</a></li>
 </ul>
+
+
+{% if leader %}
+{% for i in leader %}
+<ul class="nav nav-tabs" style="height: 180px;border-bottom:0px;">
+    <li style="display:block;float:left;width:35%;height: 130px;">
+        <img src="{{i.invest_project.logo}}">
+    </li>
+    <li style="display:block;float:left;width:65%;">
+       <h3 style="display: inline;">{{i.invest_project.name}}</h3>
+       <label style="color:#C30;font-size:14px; font-weight:bold;">预热中</label>
+    </li>
+    <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+        <h4>融资份额<b>{{i.invest_project.invest_num}}</b>万份</h4>
+    </li>
+    <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+        <h4>已融资份额<b>{{i.invest_project.finish}}</b>万份</h4>
+    </li>
+    <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+        <h4>我已预约份额<b>{{i.invest_num}}</b>万份</h4>
+    </li>
+     <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+         <h4>完成率<b>{% widthratio i.invest_project.finish i.invest_project.invest_num 100 %}</b>%</h4>
+     </li>
+</ul>
+{% endfor %}
+{% endif %}
+{% endblock %}
+{% block script %}
+<script>
+    function showContent(){
+        $(this).addClass("active").sibling().remove("active");
+        var id =$(this).data('pp');
+		$('#'+id).show().siblings().hide();
+    }
+
+</script>
 {% endblock %}
