@@ -8,13 +8,13 @@
 
 <hr style="margin-top:10px;margin-bottom:10px;">
 
-<ul class="nav nav-tabs" style="margin-bottom: 30px;">
-    <li role="presentation"  data-dd="invested" onclick="showContent()" class="active"><a href="#">已投项目</a></li>
-    <li role="presentation" data-dd="focus" onclick="showContent()"><a href="#">关注的项目</a></li>
-    <li role="presentation" data-dd="people" onclick="showContent()"><a href="#">关注的人</a></li>
+<ul class="nav nav-tabs" style="margin-bottom: 30px;" id="nav">
+    <li role="presentation"  data-dd="invested"  class="active"><a href="#">已投项目</a></li>
+    <li role="presentation" data-dd="focus" ><a href="#">关注的项目</a></li>
+    <li role="presentation" data-dd="people" ><a href="#">关注的人</a></li>
 </ul>
-
-
+<div>
+<div id="invested">
 {% if leader %}
 {% for i in leader %}
 <ul class="nav nav-tabs" style="height: 180px;border-bottom:0px;">
@@ -39,15 +39,49 @@
      </li>
 </ul>
 {% endfor %}
+{% else %}
+    <h5>你还没有投资项目呢？</h5>
 {% endif %}
+</div>
+<div id="focus" style="display: none">
+{% if leader %}
+{% for i in leader %}
+<ul class="nav nav-tabs" style="height: 180px;border-bottom:0px;">
+    <li style="display:block;float:left;width:35%;height: 130px;">
+        <img src="{{i.invest_project.logo}}">
+    </li>
+    <li style="display:block;float:left;width:65%;">
+       <h3 style="display: inline;">{{i.invest_project.name}}</h3>
+       <label style="color:#C30;font-size:14px; font-weight:bold;">预热中</label>
+    </li>
+    <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+        <h4>融资份额<b>{{i.invest_project.invest_num}}</b>万份</h4>
+    </li>
+    <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+        <h4>已融资份额<b>{{i.invest_project.finish}}</b>万份</h4>
+    </li>
+    <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+        <h4>我已预约份额<b>{{i.invest_num}}</b>万份</h4>
+    </li>
+     <li style="display:block;float:left;width:30%;margin-top:10px;margin-bottom:10px;">
+         <h4>完成率<b>{% widthratio i.invest_project.finish i.invest_project.invest_num 100 %}</b>%</h4>
+     </li>
+</ul>
+{% endfor %}
+{% else %}
+    <h5>你还没有投资项目呢？</h5>
+{% endif %}
+</div>
 {% endblock %}
+</div>
 {% block script %}
 <script>
-    function showContent(){
-        $(this).addClass("active").sibling().remove("active");
-        var id =$(this).data('pp');
-		$('#'+id).show().siblings().hide();
-    }
-
+    $(function(){
+        $('#nav li').bind('click',function (event) {
+            $(this).addClass("active").siblings().removeClass("active");
+            var id =$(this).data('dd');
+            $('#'+id).show().siblings().hide();
+        })
+    })
 </script>
 {% endblock %}

@@ -2,6 +2,37 @@
 {% block navigation %}
 {% include 'navigation_userinfo.html' %}
 {% endblock %}
-{% block content %}
+{% block css %}
 
+<style>
+    #info .form-control{display:inline;width:70%;float:right;}
+</style>
+{% endblock %}
+{% block content %}
+<h2 class="center-block" style="margin-top:0px;margin-bottom:10px;">安全中心</h2>
+<ul class="nav nav-tabs" style="margin-bottom: 30px;" id="nav">
+    <li role="presentation"  data-dd="change"  class="active"><a href="#">更换手机</a></li>
+    <li role="presentation" data-dd="modify" ><a href="#">修改密码</a></li>
+</ul>
+<div class="col-sm-7" id="info">
+    <div id="modify"  style="display:none">
+        {{modify_password_form.as_p}}
+        <button class="btn btn-default" type="submit">Button</button>
+    </div>
+    <div id="change"  >
+        {{change_password_form.as_p}}
+        <button class="btn btn-default" type="submit">Button</button>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        $('#nav li').bind('click',function (event) {
+            $(this).addClass("active").siblings().removeClass("active");
+            var id =$(this).data('dd');
+            $('#'+id).show().siblings().hide();
+        })
+    })
+</script>
 {% endblock %}

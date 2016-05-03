@@ -394,7 +394,7 @@ class UserInformationForm(ModelForm):
         widgets = {
             'cate': forms.Select(attrs={'class': 'form-control'}),
             'nickname': forms.TextInput(attrs={'class': 'form-control'}),
-            'gender': forms.RadioSelect(renderer=MyCustomRenderer, attrs={'class': 'user_radio'}),
+            'gender': forms.RadioSelect(renderer=MyCustomRenderer, attrs={'class': 'checkbox'}),
             'birthday': forms.TextInput(attrs={'class': 'form-control'}),
             'cellphone': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -402,7 +402,7 @@ class UserInformationForm(ModelForm):
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'education': forms.Select(attrs={'class': 'form-control'}),
             'monthly_income': forms.Select(attrs={'class': 'form-control'}),
-            'marriage': forms.RadioSelect(renderer=MyCustomRenderer, attrs={'class': 'user_radio'}),
+            'marriage': forms.RadioSelect(renderer=MyCustomRenderer, attrs={'class': 'checkbox'}),
             'qq_num': forms.TextInput(attrs={'class': 'form-control'}),
             'wechat_num': forms.TextInput(attrs={'class': 'form-control'}),
             'weibo_num': forms.TextInput(attrs={'class': 'form-control'}),
@@ -437,7 +437,7 @@ class ModfiyPForm(forms.Form):
                 'placeholder': u"手机号",
                 'type': 'text',
                 'name': 'name',
-                'class': 'inputxt',
+                'class': 'form-control',
                 'ajaxurl': '/checkuser_phone/'
             }
         ),
@@ -452,7 +452,7 @@ class ModfiyPForm(forms.Form):
                 'placeholder': u"短信验证码",
                 'type': 'text',
                 'name': 'smscode',
-                'class': 'inputxt',
+                'class': 'form-control',
                 'ajaxurl': '/checksmscode/'
             }
         ),
@@ -466,7 +466,7 @@ class ModfiyPForm(forms.Form):
                 'placeholder': u"验证码",
                 'type': 'text',
                 'name': 'yzm',
-                'class': 'inputxt',
+                'class': 'form-control',
                 'ajaxurl': '/checkvcode/'
             }
         ),
@@ -493,7 +493,7 @@ class ForgetPWForm(forms.Form):
                 'placeholder': u"手机号",
                 'type': 'text',
                 'name': 'name',
-                'class': 'inputxt',
+                'class': 'form-control',
                 'ajaxurl': '/checkuser/'
             }
         ),
@@ -508,7 +508,7 @@ class ForgetPWForm(forms.Form):
                 'placeholder': u"短信验证码",
                 'type': 'text',
                 'name': 'smscode',
-                'class': 'inputxt',
+                'class': 'form-control',
                 'ajaxurl': '/checksmscode/'
             }
         ),
@@ -523,7 +523,7 @@ class ForgetPWForm(forms.Form):
                 'placeholder': u"验证码",
                 'type': 'text',
                 'name': 'yzm',
-                'class': 'inputxt',
+                'class': 'form-control',
                 'ajaxurl': '/checkvcode/'
             }
         ),
@@ -550,7 +550,7 @@ class ModfiyPWForm(forms.Form):
                 'placeholder': u"密码",
                 'type': 'password',
                 #'name': 'userpassword',
-                'class': 'inputxt'
+                'class': 'form-control'
             }
         ),
      )
@@ -563,7 +563,7 @@ class ModfiyPWForm(forms.Form):
                 'placeholder': u"确认密码",
                 'type': 'password',
                 #'name': 'userpassword2',
-                'class': 'inputxt'
+                'class': 'form-control'
             }
         ),
      )

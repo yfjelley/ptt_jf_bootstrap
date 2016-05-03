@@ -357,7 +357,9 @@ def auth_register(request):
 
 
 def safe_center(request):
-    return render_to_response('safe_center.html', context_instance=RequestContext(request))
+    modify_password = ModfiyPWForm()
+    change_password = ModfiyPForm()
+    return render_to_response('safe_center.html',{'modify_password_form':modify_password,'change_password_form':change_password},context_instance=RequestContext(request))
 def manage(request):
     u = User.objects.get(username='15721448969')
     leader = u.invest_user_set.all()
@@ -394,7 +396,7 @@ def userinfo(request,objectid=None):
         return HttpResponseRedirect(reverse('userinfo'))
     else:
         try:
-            form = UserInformationForm(instance=user.userinformation)
+            form = UserInformationForm()
         except ObjectDoesNotExist:
             form = UserInformationForm()
 
