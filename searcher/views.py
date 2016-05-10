@@ -268,7 +268,6 @@ def register(request):
             return render_to_response("signup.html", {'form': form}, context_instance=RequestContext(request))
     else:
         code = request.GET.get('code',None)
-        print code
         form = RegisterForm()
         return render_to_response("signup.html", {'form': form,'code':code}, context_instance=RequestContext(request))
 

@@ -3,5 +3,21 @@
 {% include 'navigation_userinfo.html' %}
 {% endblock %}
 {% block content %}
-
+<h3>消息通知</h3>
+<ul class="nav nav-tabs" style="margin-bottom: 30px;" id="nav">
+    <li role="presentation"  data-dd="invested"  class="active"><a href="#">个人消息</a></li>
+    <li role="presentation" data-dd="focus" ><a href="#">通知</a></li>
+</ul>
+<h5>xxxxxxxxxxxxx</h5>
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        $('#nav li').bind('click',function (event) {
+            $(this).addClass("active").siblings().removeClass("active");
+            var id =$(this).data('dd');
+            $('#'+id).show().siblings().hide();
+        })
+    })
+</script>
 {% endblock %}

@@ -5,8 +5,7 @@
     #register .row {background-color:#FFFFFF;margin-top:60px;padding-bottom:80px;}
 	#register .login {float:right;}
 	#register .checkbox {padding-top:0px;}
-
-
+	.Validform_wrong {background-color:red; }
 </style>
 
 <div class="container" id="register">
@@ -79,4 +78,48 @@
 </div>
 
 
+{% endblock %}
+{% block script %}
+<script src="/static/js/yz.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        var demo = $(".form-horizontal").Validform({
+            tiptype: 3,
+            label: ".label",
+            showAllError: true,
+            datatype: {
+                "zh1-6": /^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
+            },
+            ajaxPost: false,
+            callback:function(data){
+                str = "success";
+        }
+        });
+        demo.tipmsg.w["zh1-6"] = "请输入1到6个字符！";
+
+        demo.addRule([
+            {
+                ele: "#id_username",
+                datatype: "m"
+            },
+            {
+                ele: "#id_password",
+                datatype: "*6-20"
+            },
+            {
+                ele: "#id_password2",
+                datatype: "*6-20",
+                recheck: "password"
+            },
+            {
+                ele: "#id_vcode",
+                datatype: "n4"
+            },
+            {
+                ele: "#id_smscode",
+                datatype: "n4"
+            }
+        ]);
+    });
+</script>
 {% endblock %}
